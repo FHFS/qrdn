@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/fhfs/Repos/qrdn/qrdn/qrdn.csproj": {}
+    "/home/fhfs/Repos/qrdn/qrdn.csproj": {}
   },
   "projects": {
-    "/home/fhfs/Repos/qrdn/qrdn/qrdn.csproj": {
+    "/home/fhfs/Repos/qrdn/qrdn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fhfs/Repos/qrdn/qrdn/qrdn.csproj",
+        "projectUniqueName": "/home/fhfs/Repos/qrdn/qrdn.csproj",
         "projectName": "qrdn",
-        "projectPath": "/home/fhfs/Repos/qrdn/qrdn/qrdn.csproj",
+        "projectPath": "/home/fhfs/Repos/qrdn/qrdn.csproj",
         "packagesPath": "/home/fhfs/.nuget/packages/",
-        "outputPath": "/home/fhfs/Repos/qrdn/qrdn/obj/",
+        "outputPath": "/home/fhfs/Repos/qrdn/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/fhfs/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
