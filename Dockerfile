@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy the project files to the container
 COPY ./*.csproj ./
 
-# Resolve dependencies in order to prevent timeout during build
-RUN dotnet restore --disable-parallel
+# Resolve dependencies, if timeouts occur build with "docker build --network=host ."
+RUN dotnet restore
 
 # Copy the rest of the application code to the container
 COPY . ./
