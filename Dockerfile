@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the project files to the container
 COPY ./*.csproj ./
 
-# Resolve dependencies, if timeouts occur build with "docker build --network=host ."
+# Resolve dependencies, if timeouts occur build with "docker build -t qrdn:latest--network=host ."
 RUN dotnet restore
 
 # Copy the rest of the application code to the container
@@ -18,6 +18,9 @@ RUN dotnet publish -c Release -o out
 
 # Create a new image for the runtime environment
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+
+# Install required library for Bitmap
+RUN apt update && apt install libgdiplus
 
 # Set the working directory inside the container
 WORKDIR /app
