@@ -20,7 +20,7 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
 # Install required library for Bitmap
-RUN apt update && apt install libgdiplus
+RUN apt update && apt install -y libgdiplus
 
 # Set the working directory inside the container
 WORKDIR /app
