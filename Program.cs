@@ -5,18 +5,53 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using QRCoder;
 using System.Drawing;
+using System.Net;
 
 namespace QRdn
 {
     public class QRCodeController : Controller
     {
+
+        public static async Task<Bitmap> DownloadBitmapFromUrl(string url)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                using (HttpResponseMessage response = await httpClient.GetAsync(url))
+                {
+                    response.EnsureSuccessStatusCode();
+                    using (Stream stream = await response.Content.ReadAsStreamAsync())
+                    {
+                        return new Bitmap(stream);
+                    }
+                }
+            }
+        }
+
+        public QRCodeController()
+        {
+            SetIconAsync().Wait();
+        }
+        private async Task SetIconAsync()
+        {
+            string imageUrl = "https://th.bing.com/th/id/OIP.upQhneQriWKNEvZZDinfswHaHa?rs=1&pid=ImgDetMain";
+            icon = await DownloadBitmapFromUrl(imageUrl);
+        }
+
+        private Bitmap icon;
+
         public IActionResult Index(string data)
         {
+            // Check if data is provided
+            if (string.IsNullOrEmpty(data))
+            {
+                return BadRequest("Data parameter is missing.");
+            }
+
             // Generate QRCode image
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.DarkRed, Color.PaleGreen, icon, 15, 6, true);
 
             // Convert Bitmap to byte array
             byte[] byteArray;
