@@ -66,13 +66,13 @@ namespace QRdn
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
-                webBuilder.UseUrls("http://localhost:89");
+                webBuilder.UseUrls("http://localhost:8080");
             });
 
         public static void Main(string[] args)
         {
             Console.WriteLine("QR dotNet started");
-            h t
+            CreateHostBuilder(args).Build().Run();
             Console.ReadLine();
         }
 
