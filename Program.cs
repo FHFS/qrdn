@@ -72,7 +72,7 @@ namespace QRdn
         public static void Main(string[] args)
         {
             Console.WriteLine("QR dotNet started");
-            CreateHostBuilder(args).Build().Run();
+            h t
             Console.ReadLine();
         }
 
