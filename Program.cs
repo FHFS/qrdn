@@ -11,7 +11,6 @@ namespace QRdn
 {
     public class QRCodeController : Controller
     {
-
         public static async Task<Bitmap> DownloadBitmapFromUrl(string url)
         {
             using (HttpClient httpClient = new HttpClient())
@@ -65,6 +64,7 @@ namespace QRdn
             return File(byteArray, "image/png");
         }
     }
+
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
@@ -110,6 +110,5 @@ namespace QRdn
             CreateHostBuilder(args).Build().Run();
             Console.ReadLine();
         }
-
     }
 }
